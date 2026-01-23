@@ -1,5 +1,7 @@
 # furryCTF Dockers
-这里是一些在furryCTF题目中使用的Docker容器。
+这里存放着一些在furryCTF题目中使用的Docker容器和网站。
+
+你可以在这里看到furryCTF自开始举办以来几乎所有的网站/Docker。
 
 # 赛事官网
 https://furryctf.com
