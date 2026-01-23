@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: flag.txt
+Disallow: D0.txt
+Disallow: You.txt
+Disallow: Know.txt
+Disallow: Why.txt
+Disallow: Spider.txt
+Disallow: L1kes.txt
+Disallow: Rob0ts.txt
