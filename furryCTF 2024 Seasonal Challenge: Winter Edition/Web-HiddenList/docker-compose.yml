@@ -1,0 +1,9 @@
+version: "2"
+services:
+  scratch:
+    build: ./
+    cap_add:
+      - SYS_TIME
+      - SYS_NICE
+    ports:
+      - "10003:80"

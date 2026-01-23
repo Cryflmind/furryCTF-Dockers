@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>毛茸茸传奇</title>
+    <style>
+        .container{width:100%;height:100%;display:none}
+        .form{padding-top:10px}
+        .item_blank{display:flex;flex-direction:column;align-items:flex-start;margin-top:20px}
+        .item_body{display:flex;flex-direction:column;flex-wrap:nowrap;align-items:flex-start;margin-top:20px}
+        *{margin:0;padding:0;box-sizing:border-box;font-family:"MV Boli",cursive}
+        body{background:#111}
+        h2{display:flex;color:transparent;justify-content:center;align-items:center;height:100vh;font-size:15vw}
+        h2 span:nth-child(6){margin-left:5vw}
+        h2 span{animation:LetterColor 3s linear infinite;animation-delay:calc(0.1s * var(--o))}
+        @keyframes LetterColor{0%{color:#fff;text-shadow:0 0 10px #00b3ff,0 0 20px #00b3ff,0 0 40px #00b3ff,0 0 80px #00b3ff,0 0 120px #00b3ff,0 0 200px #00b3ff,0 0 300px #00b3ff,0 0 400px #00b3ff;filter:blur(2px) hue-rotate(0deg)}
+        30%,70%{color:#fff;text-shadow:0 0 10px #00b3ff,0 0 20px #00b3ff,0 0 40px #00b3ff,0 0 80px #00b3ff,0 0 120px #00b3ff,0 0 200px #00b3ff;filter:blur(2px) hue-rotate(360deg)}
+        100%{color:transparent;text-shadow:none;filter:blur(2px) hue-rotate(0deg)}
+        }
+    </style>
+</head>
+<body>
+    <h2>
+        <span style="--o:1">毛</span>
+        <span style="--o:2">茸</span>
+        <span style="--o:3">茸</span>
+        <span style="--o:4">传</span>
+        <span style="--o:5">奇</span>
+    </h2>
+    <div id="container" class="container">
+        <h1>欢迎来到毛茸茸的世界！<br>你准备好成为毛茸茸传奇了吗？</h1>
+        <h3>游戏规则：为每一位客户的订单选择相应的配料。</h3>
+        <div class="form">
+			<label>设置种子：</label>
+			<input type="text" name="name" id="seed_id" required />
+			<button id="submit_seed" onclick="submit_seed();">点我提交</button>
+		</div>
+        <p>[+]订单编号：<a id="order_id" style="color: red;">Loading...</a></p>
+        <div class="item_body">
+            <div class="item_blank">
+                <img src="static/item_0.png"/>
+                <input type="text" name="name" id="a1" required  placeholder="猜猜物品的数量"/>
+            </div>
+            <div class="item_blank">
+                <img src="static/item_1.png"/>
+                <input type="text" name="name" id="a2" required  placeholder="猜猜物品的数量"/>
+            </div>
+            <div class="item_blank">
+                <img src="static/item_2.png"/>
+                <input type="text" name="name" id="a3" required  placeholder="猜猜物品的数量"/>
+            </div>
+            <div class="item_blank">
+                <img src="static/item_3.png"/>
+                <input type="text" name="name" id="a4" required  placeholder="猜猜物品的数量"/>
+            </div>
+            <div class="item_blank">
+                <img src="static/item_4.png"/>
+                <input type="text" name="name" id="a5" required  placeholder="猜猜物品的数量"/>
+            </div>
+        </div>
+        <button onclick="submit_guess();" style="padding: 20px;margin-top:20px">提交</button>
+    </div>
+    <button id="play_button" onclick='document.getElementById("bg_audio").play()'>背景音乐</button>
+    <button id="next_button" onclick='document.getElementsByTagName("h2")[0].remove();document.body.style.backgroundColor = "#ffffff";document.getElementById("next_button").remove();document.getElementById("play_button").remove();document.getElementById("container").style.display="block";'>看题</button>
+    <audio src="static/background.mp3" autoplay id="bg_audio" loop="loop"></audio>
+    <script>
+        var userUUID = "";
+        function submit_seed() {
+            const seed_id = document.getElementById("seed_id").value;
+            fetch(`/api/createUser?seed=${seed_id}`)
+                .then((r) => {
+                    if (r.ok) {
+                        return r.text();
+                    } else {
+                        alert("输入的种子必须是整数！");
+                        return Promise.reject("qwq");
+                    }
+                })
+                .then((r) => {
+                    const ret_data = JSON.parse(r);
+                    userUUID = ret_data["userUUID"];
+                    if (ret_data.state) alert("用户创建成功~");
+                    document.getElementById("submit_seed").remove();
+                    document.getElementById("seed_id").disabled = true;
+                    document.getElementById("order_id").innerText = ret_data.order_id;
+                });
+        }
+        function submit_guess() {
+            if (userUUID == "") {alert("请先输入种子后再玩吧~"); return;}
+            const a1 = document.getElementById("a1").value;
+            const a2 = document.getElementById("a2").value;
+            const a3 = document.getElementById("a3").value;
+            const a4 = document.getElementById("a4").value;
+            const a5 = document.getElementById("a5").value;
+            fetch(`/api/processing?userUUID=${userUUID}&a1=${a1}&a2=${a2}&a3=${a3}&a4=${a4}&a5=${a5}`)
+                .then((r) => {
+                    if (r.ok) {
+                        return r.text();
+                    } else {
+                        return Promise.reject("qwq");
+                    }
+                })
+                .then((r) => {
+                    const ret_data = JSON.parse(r);
+                    document.getElementById("a1").value = "";document.getElementById("a2").value = "";document.getElementById("a3").value = "";document.getElementById("a4").value = "";document.getElementById("a5").value = "";
+                    if(ret_data["ans"]) {alert("恭喜你，答对啦~~");} else {alert("【订单已更新】诶呀~ 输入的数据是不是有点问题呢");} 
+                    document.getElementById("order_id").innerText = ret_data.order_id;
+                    if(ret_data["game_finish"]) {
+                        alert(`恭喜你，通关啦~ 这是你今天的收入：${ret_data["flag"]}`)
+                    }
+
+                });
+        }
+    </script>
+</body>
+</html>

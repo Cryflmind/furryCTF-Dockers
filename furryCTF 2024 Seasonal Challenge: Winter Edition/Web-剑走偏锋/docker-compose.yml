@@ -1,0 +1,19 @@
+version: "2"
+services:
+  apache:
+    build: ./static/
+    labels:
+      - "traefik.backend=alpine"
+      - "traefik.frontend.rule=Host:ctfServer"
+    environment:
+      - PHP_XDEBUG_ENABLED=true
+    volumes:
+      - "./app:/app"
+    cap_add:
+      - SYS_TIME
+      - SYS_NICE
+    ports:
+      - "10010:80"
+# networks:
+#   default:
+#       name: docker_docker-localhost

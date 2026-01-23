@@ -1,0 +1,7 @@
+version: '2'
+services:
+ redis:
+   build: ./static/
+   ports:
+    - "10008:6379"
+    - "10005:80"

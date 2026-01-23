@@ -1,0 +1,157 @@
+/* Hayy what r u doin {} */
+
+* {
+  margin: 0;
+}
+
+  html, body {
+  height: 100%;
+}
+
+body {
+  background-color: #FFFFFF;
+  background-image: url('swimcorgis.gif');
+  background-position: 0 0;
+  padding: 0;
+  margin: 0;
+}
+
+body:after { /* image preload hack */
+  content: url('unmute.svg');
+  display: none;
+}
+
+#wrapper { /* footer fix hack */
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -25px;
+}
+#wrapper .push {
+  height: 25px;
+}
+
+footer {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  height: 26px;
+}
+
+#follow {
+  float: right;
+  padding-top: 5px;
+  padding-right: 15px;
+  font-family: verdana, sans-serif;
+  font-size: .75em;
+  font-weight: bold;
+}
+
+#marquee {
+  width: 100%;
+  visibility: hidden;
+  position: fixed;
+  overflow: hidden;
+  white-space: nowrap;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+
+#player {
+  /* visibility: hidden; u think ur clever youtube? not playing videos if hidden. WELL */
+  position: fixed;
+  width: 0;
+  height: 0;
+  left: 0;
+}
+
+#mute {
+  height: 25px;
+  width: 25px;
+  float: right;
+  margin-right: 11px;
+  cursor: pointer;
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+
+#banner2 {
+  width:100%;
+  visibility:hidden;
+  position:fixed;
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+  font-family: verdana, sans-serif;
+}
+
+#banner2 a {
+  color: black;
+  text-decoration: none;
+}
+
+#banner2 a:hover, #banner2 a:active {
+  color: red;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: -webkit-linear-gradient(180deg,#f35626,#feab3a);
+  -webkit-animation: rainbow .25s infinite linear;
+}
+
+#banner2 a:link, #banner2 a:visited {
+  color: black;
+}
+
+#banner {
+  width:100%;
+  visibility:hidden;
+  position:fixed;
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+  font-family: verdana, sans-serif; 
+}
+
+#banner a {
+  color: black;
+  text-decoration: none;
+}
+
+#banner a:hover, #banner a:active {
+  color: red;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: -webkit-linear-gradient(180deg,#f35626,#feab3a);
+  -webkit-animation: rainbow .25s infinite linear;
+}
+
+#banner a:link, #banner a:visited {
+  color: black; 
+}
+
+#follow a {
+  color: black;
+  text-decoration: none;
+}
+
+#follow a:link, #follow a:visited {
+  color: black;
+}
+
+#follow a:hover, #follow a:active {
+  color: red;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: -webkit-linear-gradient(180deg,#f35626,#feab3a);
+  -webkit-animation: rainbow .25s infinite linear;
+}
+
+@-webkit-keyframes rainbow {
+  from {
+    -webkit-filter: hue-rotate(0deg);
+  } to {
+    -webkit-filter: hue-rotate(360deg);
+  }
+}

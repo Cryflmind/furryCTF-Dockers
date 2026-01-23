@@ -1,0 +1,20 @@
+version: "2"
+services:
+  apache:
+    build: ./ctf_question/
+    labels:
+      - "traefik.backend=alpine"
+      - "traefik.frontend.rule=Host:ctfServer"
+    # volumes:
+    #   - type: bind
+    #     source: ./resource/app
+    #     target: /app
+    #     read_only: true
+    cap_add:
+      - SYS_TIME
+      - SYS_NICE
+    ports:
+      - "10000:80"
+# networks:
+#   default:
+#       name: docker_docker-localhost
