@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>snow</title>
+
+<style>
+    .buttons {background-color: #555555;}
+    body{
+        background:#000;
+    }
+</style>
+<script type="text/javascript">
+function play()
+{
+	var p=document.getElementById("players");
+	p.play();
+}
+</script>
+</head>
+
+<body>
+
+
+<script src='snowflakes.min.js'></script>
+<script src="index.js"></script>
+<audio id="players" src="https://nf-sycdn.kuwo.cn/7b678b365ea966b9a69822abd446eee2/67698a39/resource/n1/19/27/3813304808.mp3?bitrate$128&from=vip" loop="true" autoplay="true"></audio>
+<button class="buttons" onclick="play();">Play Music</button>
+
+
+
+
+</body>
+
+</html>
