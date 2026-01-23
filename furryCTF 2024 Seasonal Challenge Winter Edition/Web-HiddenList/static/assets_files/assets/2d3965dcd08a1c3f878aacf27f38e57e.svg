@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="152" height="142.1136016845703" viewBox="-0.5 0.5 152 142.1136016845703">
+  <defs>
+    <radialGradient id="grad_1" cx="0.48009999999999997" cy="0.5635" r="0.7325499999999999">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="1"/>
+    </radialGradient>
+    <radialGradient id="grad_2" cx="0.735" cy="0.0695" r="1.2096500000000001">
+      <stop offset="0" stop-color="#E5E5E5" stop-opacity="1"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="1"/>
+    </radialGradient>
+  <radialGradient id="grad_1-,0,0,0.7119205594062805,-174.5,-95.6" cx="72.5349" cy="94.8113" r="94.7416" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="1"/>
+    </radialGradient></defs>
+  <!-- Exported by Scratch - http://scratch.mit.edu/ -->
+  <path id="ID0.54339604312554" fill="url(#grad_1-,0,0,0.7119205594062805,-174.5,-95.6)" stroke="url(#grad_2)" stroke-width="1.7359901398944357" d="M 75.5 35.0374 C 96.054 35.0374 114.679 40.9805 128.165 50.5822 C 141.652 60.1832 150 73.4427 150 88.0755 C 150 102.7083 141.652 115.9678 128.165 125.5688 C 114.679 135.1705 96.054 141.1136 75.5 141.1136 C 54.946 141.1136 36.321 135.1705 22.835 125.5688 C 9.348 115.9678 1 102.7083 1 88.0755 C 1 73.4427 9.348 60.1832 22.835 50.5822 C 36.321 40.9805 54.946 35.0374 75.5 35.0374 Z "/>
+  <g id="ID0.6771499095484614">
+    <path id="ID0.894064478110522" fill="#1EDE1E" stroke="#000000" stroke-width="2.7569289474988006" d="M 63 41.3882 L 79.5 41.3882 L 79.5 89.948 L 63 89.948 L 63 41.3882 Z "/>
+    <g id="ID0.31251264549791813">
+      <path id="ID0.31668247329071164" fill="#1EDE1E" stroke="#000000" stroke-width="3" d="M 52 2 L 91.5 2 L 91.5 41.5 L 52 41.5 L 52 2 Z "/>
+      <path id="ID0.6315912781283259" fill="#000000" stroke="none" d="M 61.5 14 L 68.5 14 L 68.5 21 L 61.5 21 L 61.5 14 Z " stroke-width="1"/>
+      <path id="ID0.6315912781283259" fill="#000000" stroke="none" d="M 68.25 19.75 L 75.25 19.75 L 75.25 26.75 L 68.25 26.75 L 68.25 19.75 Z " stroke-width="1"/>
+      <path id="ID0.6315912781283259" fill="#000000" stroke="none" d="M 74.75 14 L 81.75 14 L 81.75 21 L 74.75 21 L 74.75 14 Z " stroke-width="1"/>
+      <path id="ID0.6315912781283259" fill="#000000" stroke="none" d="M 64.1786 23.1286 L 80.1786 23.1286 L 80.1786 27.8786 L 64.1786 27.8786 L 64.1786 23.1286 Z " stroke-width="1.6859640286835345"/>
+      <path id="ID0.6315912781283259" fill="#000000" stroke="none" d="M 74.1857 26.6071 L 80.1857 26.6071 L 80.1857 32.6071 L 74.1857 32.6071 L 74.1857 26.6071 Z " stroke-width="0.8571428656578064"/>
+      <path id="ID0.6315912781283259" fill="#000000" stroke="none" d="M 64.1857 26.5571 L 70.1857 26.5571 L 70.1857 32.5571 L 64.1857 32.5571 L 64.1857 26.5571 Z " stroke-width="0.8571428656578064"/>
+    </g>
+  </g>
+</svg>

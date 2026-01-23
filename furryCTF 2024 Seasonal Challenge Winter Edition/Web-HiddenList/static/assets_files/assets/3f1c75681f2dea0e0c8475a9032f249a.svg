@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="174.5" height="165.15000915527344" viewBox="-0.5 0.20000004768371582 174.5 165.15000915527344">
+  <defs>
+    <radialGradient id="grad_1" cx="0.5158" cy="0.6620999999999999" r="0.8607299999999999">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="1"/>
+    </radialGradient>
+  <radialGradient id="grad_1-,0,0,1.1749999523162842,-153,-181.6" cx="89.4597" cy="109.0595" r="146.1697" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="1"/>
+    </radialGradient></defs>
+  <!-- Exported by Scratch - http://scratch.mit.edu/ -->
+  <path id="ID0.8312023123726249" fill="url(#grad_1-,0,0,1.1749999523162842,-153,-181.6)" stroke="#E5E5E5" stroke-width="2.1820288210485534" d="M 86.75 1.7 C 110.408 1.7 131.845 10.7851 147.368 25.462 C 162.891 40.1378 172.5 60.4065 172.5 82.775 C 172.5 105.1435 162.891 125.4122 147.368 140.088 C 131.845 154.7649 110.408 163.85 86.75 163.85 C 63.092 163.85 41.655 154.7649 26.132 140.088 C 10.609 125.4122 1 105.1435 1 82.775 C 1 60.4065 10.609 40.1378 26.132 25.462 C 41.655 10.7851 63.092 1.7 86.75 1.7 Z "/>
+  <g id="ID0.549194822087884">
+    <path id="ID0.894064478110522" fill="#1EDE1E" stroke="#000000" stroke-width="2.3833898631288886" d="M 77.5 72.7317 L 94 72.7317 L 94 102.6951 L 77.5 102.6951 L 77.5 72.7317 Z "/>
+    <g id="ID0.31251264549791813">
+      <path id="ID0.31668247329071164" fill="#1EDE1E" stroke="#000000" stroke-width="3" d="M 66.5 34 L 106 34 L 106 73.5 L 66.5 73.5 L 66.5 34 Z "/>
+      <path id="ID0.6315912781283259" fill="#000000" stroke="none" d="M 76 46 L 83 46 L 83 53 L 76 53 L 76 46 Z " stroke-width="1"/>
+      <path id="ID0.6315912781283259" fill="#000000" stroke="none" d="M 82.75 51.75 L 89.75 51.75 L 89.75 58.75 L 82.75 58.75 L 82.75 51.75 Z " stroke-width="1"/>
+      <path id="ID0.6315912781283259" fill="#000000" stroke="none" d="M 89.25 46 L 96.25 46 L 96.25 53 L 89.25 53 L 89.25 46 Z " stroke-width="1"/>
+      <path id="ID0.6315912781283259" fill="#000000" stroke="none" d="M 78.6786 55.1286 L 94.6786 55.1286 L 94.6786 59.8786 L 78.6786 59.8786 L 78.6786 55.1286 Z " stroke-width="1.6859640286835345"/>
+      <path id="ID0.6315912781283259" fill="#000000" stroke="none" d="M 88.6857 58.6071 L 94.6857 58.6071 L 94.6857 64.6071 L 88.6857 64.6071 L 88.6857 58.6071 Z " stroke-width="0.8571428656578064"/>
+      <path id="ID0.6315912781283259" fill="#000000" stroke="none" d="M 78.6857 58.5571 L 84.6857 58.5571 L 84.6857 64.5571 L 78.6857 64.5571 L 78.6857 58.5571 Z " stroke-width="0.8571428656578064"/>
+    </g>
+  </g>
+</svg>

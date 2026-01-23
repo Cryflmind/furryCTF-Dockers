@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="137.08998823397877" height="100.60904646151783" viewBox="-0.45879107829691423 -0.6714911174452449 137.08998823397877 100.60904646151783">
+  <defs>
+    <linearGradient id="grad_1" x2="1">
+      <stop offset="0" stop-color="#FFFFCC" stop-opacity="1"/>
+      <stop offset="1" stop-color="#05023A" stop-opacity="1"/>
+    </linearGradient>
+  <linearGradient id="grad_1-.4123270511627197,-1.7210615873336792,-0.5962504148483276,-0.8357347249984741,-473.6,662" x2="135.5224" x1="10.0814" y1="92.4397" y2="2.9445" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFCC" stop-opacity="1"/>
+      <stop offset="1" stop-color="#05023A" stop-opacity="1"/>
+    </linearGradient></defs>
+  <!-- Exported by Scratch - http://scratch.mit.edu/ -->
+  <image id="ID0.7441588342189789" width="2" height="2" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAADklEQVR42mNhgAIWGAMAAH4ACYwGaSAAAAAtdEVYdFNvZnR3YXJlAGJ5LmJsb29kZHkuY3J5cHRvLmltYWdlLlBORzI0RW5jb2RlcqgGf+4AAAAASUVORK5CYII=" transform="matrix(1.8643815517425537,0,0,1.8643815517425537,0.65,95.1)" stroke-width="1" style="image-rendering: optimizespeed; image-rendering: pixelated;"/>
+  <path id="ID0.5899173258803785" fill="#FFFFCC" stroke="none" d="M 6.6063 90.1162 C 7.7264 90.1162 8.7414 90.536 9.4767 91.2144 C 10.2119 91.8934 10.6667 92.8304 10.6667 93.8642 C 10.6667 94.898 10.2119 95.835 9.4767 96.514 C 8.7414 97.1924 7.7264 97.6122 6.6063 97.6122 C 5.4863 97.6122 4.4712 97.1924 3.736 96.514 C 3.0008 95.835 2.546 94.898 2.546 93.8642 C 2.546 92.8304 3.0008 91.8934 3.736 91.2144 C 4.4712 90.536 5.4863 90.1162 6.6063 90.1162 Z " stroke-width="0.6246639490127563"/>
+  <path id="ID0.24548965087160468" fill="url(#grad_1-.4123270511627197,-1.7210615873336792,-0.5962504148483276,-0.8357347249984741,-473.6,662)" stroke="none" d="M 10.0814 92.4397 L 135.5224 2.9445 L 133.7336 0.4373 L 8.2926 89.9325 L 10.0814 92.4397 Z " stroke-width="2.217582228119402"/>
+</svg>

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="104" height="124.5" viewBox="-0.5 0.5 104 124.5">
+  <defs>
+    <radialGradient id="grad_1" cx="0.5097999999999999" cy="0.7179000000000001" r="0.9332699999999999">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="1"/>
+    </radialGradient>
+  <radialGradient id="grad_1-,0,0,1,-195,-123" cx="52.4898" cy="107.2792" r="76.6965" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="1"/>
+    </radialGradient></defs>
+  <!-- Exported by Scratch - http://scratch.mit.edu/ -->
+  <path id="ID0.19606550084427" fill="url(#grad_1-,0,0,1,-195,-123)" stroke="#E5E5E5" stroke-width="1" d="M 51.5 66 C 65.433 66 78.058 69.222 87.199 74.426 C 96.341 79.631 102 86.818 102 94.75 C 102 102.682 96.341 109.869 87.199 115.074 C 78.058 120.278 65.433 123.5 51.5 123.5 C 37.567 123.5 24.942 120.278 15.801 115.074 C 6.659 109.869 1 102.682 1 94.75 C 1 86.818 6.659 79.631 15.801 74.426 C 24.942 69.222 37.567 66 51.5 66 Z "/>
+  <g id="ID0.08114574430510402">
+    <path id="ID0.15819635055959225" fill="#1EDE1E" stroke="#000000" stroke-width="2.9999999960782304" stroke-linecap="round" d="M 24.0081 77.989 L 46.6774 84.182 L 43.9369 93.6443 L 29.2829 89.7965 L 27.0782 97.4873 L 19.2645 95.3527 L 24.0081 77.989 Z "/>
+    <path id="ID0.15819635055959225" fill="#1EDE1E" stroke="#000000" stroke-width="3" stroke-linecap="round" d="M 28.5 91 L 52 91 L 51.85 100.85 L 36.7 101 L 36.6 109 L 28.5 109 L 28.5 91 Z "/>
+    <path id="ID0.15819635055959225" fill="#1EDE1E" stroke="#000000" stroke-width="2.9999999960782304" stroke-linecap="round" d="M 79.8919 80.189 L 57.2226 86.382 L 59.9631 95.8443 L 74.6171 91.9965 L 76.8218 99.6873 L 84.6355 97.5527 L 79.8919 80.189 Z "/>
+    <path id="ID0.15819635055959225" fill="#1EDE1E" stroke="#000000" stroke-width="3" stroke-linecap="round" d="M 76.75 90 L 53.25 90 L 53.4 99.85 L 68.55 100 L 68.65 108 L 76.75 108 L 76.75 90 Z "/>
+    <path id="ID0.894064478110522" fill="#1EDE1E" stroke="#000000" stroke-width="3" d="M 43.5 38.5 L 60 38.5 L 60 97 L 43.5 97 L 43.5 38.5 Z "/>
+    <g id="ID0.31251264549791813">
+      <path id="ID0.31668247329071164" fill="#1EDE1E" stroke="#000000" stroke-width="3" d="M 32 2 L 71.5 2 L 71.5 41.5 L 32 41.5 L 32 2 Z "/>
+      <path id="ID0.6315912781283259" fill="#000000" stroke="none" d="M 41.5 14 L 48.5 14 L 48.5 21 L 41.5 21 L 41.5 14 Z " stroke-width="1"/>
+      <path id="ID0.6315912781283259" fill="#000000" stroke="none" d="M 48.25 19.75 L 55.25 19.75 L 55.25 26.75 L 48.25 26.75 L 48.25 19.75 Z " stroke-width="1"/>
+      <path id="ID0.6315912781283259" fill="#000000" stroke="none" d="M 54.75 14 L 61.75 14 L 61.75 21 L 54.75 21 L 54.75 14 Z " stroke-width="1"/>
+      <path id="ID0.6315912781283259" fill="#000000" stroke="none" d="M 44.1786 23.1286 L 60.1786 23.1286 L 60.1786 27.8786 L 44.1786 27.8786 L 44.1786 23.1286 Z " stroke-width="1.6859640286835345"/>
+      <path id="ID0.6315912781283259" fill="#000000" stroke="none" d="M 54.1857 26.6071 L 60.1857 26.6071 L 60.1857 32.6071 L 54.1857 32.6071 L 54.1857 26.6071 Z " stroke-width="0.8571428656578064"/>
+      <path id="ID0.6315912781283259" fill="#000000" stroke="none" d="M 44.1857 26.5571 L 50.1857 26.5571 L 50.1857 32.5571 L 44.1857 32.5571 L 44.1857 26.5571 Z " stroke-width="0.8571428656578064"/>
+    </g>
+  </g>
+</svg>
