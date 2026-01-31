@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="p-5 mb-4 bg-light rounded-3 shadow-sm">
+    <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">连接未来，重塑可能</h1>
+        <p class="col-md-8 fs-4">Nexus Corp 致力于为全球企业提供最安全的云端解决方案。我们的核心加密技术领跑行业二十年。</p>
+        <button class="btn btn-primary btn-lg" type="button">了解更多</button>
+    </div>
+</div>
+
+<div class="row align-items-md-stretch">
+    <div class="col-md-6">
+        <div class="h-100 p-5 text-white bg-dark rounded-3">
+            <h2>公司公告搜索</h2>
+            <p>查询最新的安全通告、财报及人事变动。</p>
+            <form action="/search" method="GET" class="mt-3">
+                <div class="input-group mb-3">
+                    <input type="text" name="q" class="form-control" placeholder="输入关键词，例如: 2024财报">
+                    <button class="btn btn-outline-light" type="submit">搜索</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="h-100 p-5 bg-light border rounded-3">
+            <h2>安全响应中心</h2>
+            <p>如果您发现任何安全漏洞，请立即联系我们的安全团队。</p>
+            <p class="text-muted">Email: security@nexus-corp.internal</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

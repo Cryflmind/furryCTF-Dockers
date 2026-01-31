@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepSleep AI 聊天</title>
+    <style>
+               body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+        .container {
+            background: #fff;
+            padding: 30px 25px;
+            border-radius: 10px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        p {
+            text-align: center;
+            color: #555;
+            margin-bottom: 25px;
+        }
+        input[type="text"] {
+            width: 75%;
+            padding: 12px 15px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            margin-right: 10px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 12px 20px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        #result {
+            margin-top: 25px;
+            padding: 15px 20px;
+            background: #f9f9f9;
+            border-left: 5px solid #4CAF50;
+            border-radius: 6px;
+            white-space: pre-wrap;
+            color: #333;
+        }
+        .status {
+            margin-top: 10px;
+            font-style: italic;
+            color: #666;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>DeepSleep AI 聊天</h1>
+        <p>在下方输入内容，DeepSleep 会即时回复你！</p>
+        <input type="text" id="inputData" placeholder="请输入内容..." value="你好">
+        <button onclick="sendData()">发送</button>
+        <div class="status" id="status"></div>
+        <div id="result"></div>
+    </div>
+
+    <script>
+    // 敏感词汇黑名单
+    const BLACKLIST = [
+        'flag', 'cat', 'import', 'eval', 'exec', 'system', 'os.', 'subprocess',
+        'open', 'read', 'write', 'rm', 'delete', 'shutdown', 'reboot', 'python',
+        'php', 'bash', 'shell', 'command', 'curl', 'wget', 'ftp', 'telnet',
+        'ssh', 'scp', 'chmod', 'chown', 'sudo', 'su', 'admin', 'root', 'password',
+        'token', 'key', 'secret', 'config', 'env', 'environment', 'proc', 'sys',
+        'dev', 'etc', 'var', 'tmp', 'home', 'bin', 'sbin', 'usr', 'lib', 'etc','os','ls'
+    ];
+
+    function containsSensitiveWords(text) {
+        const lowerText = text.toLowerCase();
+        for (const word of BLACKLIST) {
+            // 检查单词边界，避免误判（如 "important" 不会触发 "import"）
+            const regex = new RegExp('\\b' + word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'i');
+            if (regex.test(lowerText)) {
+                return word;
+            }
+        }
+        return null;
+    }
+
+    function validateInput(input) {
+        // 检查是否为空
+        if (!input.trim()) {
+            return { valid: false, message: '请输入一些内容再发送' };
+        }
+
+        // 检查长度限制
+        if (input.length > 1000) {
+            return { valid: false, message: '输入内容过长，请限制在1000字符以内' };
+        }
+
+        // 检查敏感词
+        const sensitiveWord = containsSensitiveWords(input);
+        if (sensitiveWord) {
+            return { 
+                valid: false, 
+                message: `输入包含敏感词汇 "${sensitiveWord}"，请修改后重试` 
+            };
+        }
+
+        // 检查特殊字符（可选）
+        const dangerousChars = /[<>`$|&;{}()]/;
+        if (dangerousChars.test(input)) {
+            return { valid: false, message: '输入包含危险字符，请修改后重试' };
+        }
+
+        return { valid: true, message: '' };
+    }
+
+    function sendData() {
+        var inputData = document.getElementById('inputData').value.trim();
+        var statusElement = document.getElementById('status');
+        var resultElement = document.getElementById('result');
+
+        // 输入验证
+        const validation = validateInput(inputData);
+        if (!validation.valid) {
+            statusElement.textContent = validation.message;
+            resultElement.innerHTML = '';
+            return;
+        }
+
+        statusElement.textContent = '发送中...';
+        resultElement.innerHTML = '';
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', `http://${location.host}`, true);
+        xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    try {
+                        var data = JSON.parse(xhr.responseText);
+                        statusElement.textContent = '已收到 DeepSleep 回复';
+                        resultElement.innerHTML = `
+                            <strong>你发送的内容:</strong> ${escapeHtml(data.input_received)}<br>
+                            <strong>DeepSleep 回复:</strong> ${escapeHtml(data.processed_result)}
+                        `;
+                    } catch (e) {
+                        statusElement.textContent = '解析响应失败';
+                        resultElement.innerHTML = `<span class="error">响应不是有效JSON: ${escapeHtml(e.message)}</span>`;
+                    }
+                } else {
+                    statusElement.textContent = '请求失败';
+                    resultElement.innerHTML = `<span class="error">服务器返回状态码 ${xhr.status}</span>`;
+                }
+            }
+        };
+
+        xhr.onerror = function() {
+            statusElement.textContent = '网络错误';
+            resultElement.innerHTML = `<span class="error">无法连接到 DeepSleep 后端</span>`;
+        };
+
+        xhr.send(JSON.stringify({ input: inputData }));
+    }
+
+    // HTML 转义函数，防止 XSS
+    function escapeHtml(unsafe) {
+        if (typeof unsafe !== 'string') return unsafe;
+        return unsafe
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+
+    document.getElementById('inputData').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') sendData();
+    });
+
+    // 实时输入检查
+    document.getElementById('inputData').addEventListener('input', function(e) {
+        const input = e.target.value.trim();
+        const statusElement = document.getElementById('status');
+        
+        if (!input) {
+            statusElement.textContent = '';
+            return;
+        }
+
+        const validation = validateInput(input);
+        if (!validation.valid) {
+            statusElement.textContent = validation.message;
+            statusElement.style.color = 'red';
+        } else {
+            statusElement.textContent = '输入有效，可以发送';
+            statusElement.style.color = 'green';
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+services:
+  deepsleep:
+    build: .
+    container_name: DeepSleep
+    ports:
+      - "8000:8000"
+    restart: always

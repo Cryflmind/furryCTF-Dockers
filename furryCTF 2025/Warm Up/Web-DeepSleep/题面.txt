@@ -1,0 +1,20 @@
+猫猫最近开发出一款新的AI语言模型：DeepSleep：
+
+try:
+   question = input("").decode('utf-8')
+except:
+    question = u"服务器繁忙，请稍后再试。"
+try:
+   response = (question
+                .replace(u"请问", u"")
+                .replace(u"问", u"")
+                .replace(u"吗", u"呀")
+                .replace(u"你", u"我")
+                .replace(u"？", u"！"))
+
+print response.encode("utf-8")
+
+为了猫猫的系统安全，猫猫设置了非常严格的BLACKLIST哦~（前后端都有的那种nwn）
+还有就是，这里没有flag，所以不要试图问AI从哪里获得flag哦~他会生气不理你的~
+好啦，猫猫知道你不会自觉的nwn，所以猫猫已经在后端帮你把所有flag都替换掉了哦~
+快说：谢谢猫猫~
