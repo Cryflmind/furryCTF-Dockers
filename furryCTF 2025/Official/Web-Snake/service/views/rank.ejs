@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>全村排行榜</title>
+    <style>
+        body { background: #111; color: #ddd; font-family: sans-serif; text-align: center; padding-top: 50px; }
+        .box { border: 1px solid #333; display: inline-block; padding: 40px; border-radius: 8px; background: #222; }
+        h1 { color: gold; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>🏆 全村最高分记录</h1>
+        <p>当前记录保持者得分: <strong><%= topScore %></strong></p>
+        <hr style="border-color: #444">
+        <p>系统公告: <%= message %></p>
+        <p><em>只有管理员可以重置排行榜。</em></p>
+        <a href="/" style="color: #666">返回游戏</a>
+    </div>
+</body>
+</html>

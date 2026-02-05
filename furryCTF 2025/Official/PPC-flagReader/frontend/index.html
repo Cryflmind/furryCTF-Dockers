@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flag字符分页查看器</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 90%;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+        
+        h1 {
+            margin-bottom: 1.5rem;
+            font-size: 2.5rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .description {
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            font-size: 1.1rem;
+            color: #e0e0e0;
+        }
+        
+        .security-notice {
+            background: rgba(255, 193, 7, 0.2);
+            border: 1px solid #ffc107;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .flag-display {
+            margin: 2rem 0;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .current-char {
+            font-size: 6rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Courier New', monospace;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1rem;
+            border-radius: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .char-info {
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            color: #b0b0b0;
+        }
+        
+        .char-details {
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 0.5rem;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+        }
+        
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .page-indicator {
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 0.8rem 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+        }
+        
+        .progress-container {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            height: 10px;
+            border-radius: 5px;
+            margin-top: 1.5rem;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #00c6ff, #0072ff);
+            border-radius: 5px;
+            transition: width 0.3s ease;
+        }
+        
+        .error {
+            color: #ff6b6b;
+            background: rgba(255, 0, 0, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+        
+        .loading {
+            color: #4ecdc4;
+            font-size: 1.2rem;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .reload-btn {
+            background: rgba(255, 255, 255, 0.3);
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            margin-top: 1rem;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 1.5rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .current-char {
+                font-size: 4rem;
+                height: 120px;
+            }
+            
+            .navigation {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Flag字符分页查看器</h1>
+        
+        <div class="description">
+            <p>此应用安全地展示经过Base16编码的flag内容。每页只显示一个Base16字符。</p>
+        </div>
+        
+        <div class="security-notice">
+            <strong>安全说明：</strong> 
+            您看到的是经过Base16编码的flag字符，每个页面仅显示一个编码后的字符，确保原始flag的安全性。
+        </div>
+        
+        <div class="flag-display">
+            <div class="current-char" id="currentChar">?</div>
+            <div class="char-info" id="charInfo">第 <span id="currentPage">0</span> 页，共 <span id="totalPages">0</span> 页</div>
+            <div class="char-details" id="charDetails">Base16编码字符</div>
+            <div class="loading" id="loadingMessage">正在加载数据...</div>
+            <div class="error hidden" id="errorMessage"></div>
+            <button class="reload-btn hidden" id="reloadBtn" onclick="window.location.reload()">重新加载页面</button>
+        </div>
+        
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+        </div>
+        
+        <div class="navigation">
+            <button class="nav-btn" id="firstBtn" disabled>
+                <span>⏮️</span> 首页
+            </button>
+            <button class="nav-btn" id="prevBtn" disabled>
+                <span>◀️</span> 上一页
+            </button>
+            
+            <div class="page-indicator">
+                第 <span id="pageNum">0</span> 页
+            </div>
+            
+            <button class="nav-btn" id="nextBtn" disabled>
+                下一页 <span>▶️</span>
+            </button>
+            <button class="nav-btn" id="lastBtn" disabled>
+                末页 <span>⏭️</span>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // 全局变量
+        let currentPage = 1;
+        let totalPages = 0;
+        const API_BASE = '/api';
+        
+        // DOM元素
+        const currentCharElement = document.getElementById('currentChar');
+        const currentPageElement = document.getElementById('currentPage');
+        const totalPagesElement = document.getElementById('totalPages');
+        const pageNumElement = document.getElementById('pageNum');
+        const progressBar = document.getElementById('progressBar');
+        const loadingMessage = document.getElementById('loadingMessage');
+        const errorMessage = document.getElementById('errorMessage');
+        const charDetails = document.getElementById('charDetails');
+        const reloadBtn = document.getElementById('reloadBtn');
+        
+        // 按钮元素
+        const firstBtn = document.getElementById('firstBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const lastBtn = document.getElementById('lastBtn');
+
+        // 显示错误信息
+        function showError(message, showReload = false) {
+            errorMessage.textContent = message;
+            errorMessage.classList.remove('hidden');
+            loadingMessage.classList.add('hidden');
+            
+            if (showReload) {
+                reloadBtn.classList.remove('hidden');
+            }
+        }
+
+        // 隐藏错误信息
+        function hideError() {
+            errorMessage.classList.add('hidden');
+            reloadBtn.classList.add('hidden');
+        }
+
+        // 获取flag长度
+        async function getFlagLength() {
+            try {
+                const response = await fetch(`${API_BASE}/flag/length`);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP错误: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    return data.length;
+                } else {
+                    throw new Error('获取flag长度失败');
+                }
+            } catch (error) {
+                throw new Error(`网络错误: ${error.message}`);
+            }
+        }
+
+        // 获取指定位置的字符
+        async function getFlagChar(position) {
+            try {
+                const response = await fetch(`${API_BASE}/flag/char/${position}`);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP错误: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    return data;
+                } else {
+                    throw new Error(data.error || '获取字符失败');
+                }
+            } catch (error) {
+                throw new Error(`网络错误: ${error.message}`);
+            }
+        }
+
+        // 更新页面显示
+        async function updatePage() {
+            hideError();
+            
+            try {
+                const data = await getFlagChar(currentPage);
+                
+                currentCharElement.textContent = data.char;
+                currentPageElement.textContent = currentPage;
+                totalPagesElement.textContent = data.total_length;
+                pageNumElement.textContent = currentPage;
+                
+                // 更新字符详情显示
+                if (data.is_base64) {
+                    charDetails.textContent = 'Base16编码字符';
+                }
+                
+                // 更新进度条
+                const progress = (currentPage / data.total_length) * 100;
+                progressBar.style.width = `${progress}%`;
+                
+                // 更新按钮状态
+                firstBtn.disabled = currentPage === 1;
+                prevBtn.disabled = currentPage === 1;
+                nextBtn.disabled = currentPage === data.total_length;
+                lastBtn.disabled = currentPage === data.total_length;
+                
+                // 隐藏加载信息
+                loadingMessage.classList.add('hidden');
+                
+            } catch (error) {
+                showError(error.message, true);
+            }
+        }
+
+        // 初始化应用
+        async function initApp() {
+            try {
+                loadingMessage.textContent = '正在加载flag数据...';
+                totalPages = await getFlagLength();
+                
+                if (totalPages > 0) {
+                    await updatePage();
+                } else {
+                    showError('Flag内容为空', true);
+                }
+            } catch (error) {
+                showError(error.message, true);
+            }
+        }
+
+        // 导航功能
+        firstBtn.addEventListener('click', () => {
+            currentPage = 1;
+            updatePage();
+        });
+        
+        prevBtn.addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                updatePage();
+            }
+        });
+        
+        nextBtn.addEventListener('click', () => {
+            if (currentPage < totalPages) {
+                currentPage++;
+                updatePage();
+            }
+        });
+        
+        lastBtn.addEventListener('click', () => {
+            currentPage = totalPages;
+            updatePage();
+        });
+
+        // 初始化应用
+        initApp();
+    </script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>游戏后台入口</title>
+    <style>
+        body { 
+            background-color: #0d0d0d; 
+            color: #00ff41; 
+            font-family: 'Courier New', Courier, monospace;
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0;
+            background-image: linear-gradient(0deg, transparent 24%, rgba(0, 255, 65, .03) 25%, rgba(0, 255, 65, .03) 26%, transparent 27%, transparent 74%, rgba(0, 255, 65, .03) 75%, rgba(0, 255, 65, .03) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(0, 255, 65, .03) 25%, rgba(0, 255, 65, .03) 26%, transparent 27%, transparent 74%, rgba(0, 255, 65, .03) 75%, rgba(0, 255, 65, .03) 76%, transparent 77%, transparent);
+            background-size: 50px 50px;
+        }
+        .login-box {
+            border: 2px solid #00ff41;
+            padding: 40px;
+            width: 380px;
+            background: rgba(0, 10, 0, 0.95);
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.15);
+            position: relative;
+        }
+        h2 {
+            text-align: center;
+            border-bottom: 1px dashed #00ff41;
+            padding-bottom: 20px;
+            margin-top: 0;
+            text-shadow: 0 0 5px #00ff41;
+            letter-spacing: 2px;
+        }
+        .form-group { margin-bottom: 25px; }
+        label { display: block; margin-bottom: 10px; font-size: 0.9em; font-weight: bold; }
+        input { 
+            width: 100%; 
+            padding: 12px; 
+            background: #000; 
+            border: 1px solid #006600; 
+            color: #00ff41; 
+            font-family: inherit;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+        input:focus {
+            outline: none;
+            border-color: #00ff41;
+            box-shadow: 0 0 8px rgba(0, 255, 65, 0.4);
+        }
+        button { 
+            width: 100%; 
+            padding: 15px; 
+            background: #002200; 
+            color: #00ff41; 
+            border: 1px solid #00ff41; 
+            cursor: pointer; 
+            font-family: inherit;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-top: 10px;
+            text-transform: uppercase;
+        }
+        button:hover { 
+            background: #00ff41; 
+            color: #000; 
+            box-shadow: 0 0 10px #00ff41;
+        }
+        .error-msg {
+            color: #ff3333;
+            border: 1px solid #ff3333;
+            background: rgba(50, 0, 0, 0.3);
+            padding: 12px;
+            margin-top: 25px;
+            font-size: 0.85em;
+            text-align: center;
+        }
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.7em;
+            color: #005511;
+            border-top: 1px dotted #004400;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-box">
+        <h2>游戏后台入口</h2>
+        
+        <form action="/admin" method="POST">
+            <div class="form-group">
+                <label>> 请输入账号</label>
+                <input type="text" name="username" autocomplete="off" placeholder="admin" autofocus>
+            </div>
+            <div class="form-group">
+                <label>> 请输入密码</label>
+                <input type="password" name="password" placeholder="••••••••">
+            </div>
+            <button type="submit">登陆</button>
+        </form>
+
+        <% if (error) { %>
+            <div class="error-msg">
+                [错误] <%= error %>
+            </div>
+        <% } %>
+    </div>
+</body>
+</html>

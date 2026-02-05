@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>furryCTF 2025-智能合约挑战</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #0f172a;
+            color: #e2e8f0;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #60a5fa;
+            border-bottom: 2px solid #3b82f6;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #38bdf8;
+            margin-top: 30px;
+        }
+        .section {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        code {
+            background: #0f172a;
+            padding: 3px 6px;
+            border-radius: 4px;
+            color: #f87171;
+            font-family: 'Courier New', monospace;
+        }
+        pre {
+            background: #0f172a;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #334155;
+            font-size: 14px;
+        }
+        .address {
+            font-family: 'Courier New', monospace;
+            background: #0f172a;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            word-break: break-all;
+            border-left: 3px solid #3b82f6;
+        }
+        .btn {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+        .btn:hover {
+            background: #2563eb;
+        }
+        .btn-copy {
+            background: #475569;
+            font-size: 12px;
+            padding: 5px 10px;
+        }
+        .info-row {
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+        }
+        .label {
+            color: #94a3b8;
+            min-width: 100px;
+        }
+        .warning {
+            color: #f87171;
+            background: rgba(248, 113, 113, 0.1);
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border-left: 3px solid #f87171;
+        }
+        .success {
+            color: #10b981;
+            background: rgba(16, 185, 129, 0.1);
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border-left: 3px solid #10b981;
+        }
+        .link-btn {
+            display: inline-block;
+            background: #8b5cf6;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin: 10px 0;
+        }
+        .link-btn:hover {
+            background: #7c3aed;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔐 furryCTF 2025-智能合约挑战</h1>
+    
+    <div class="section">
+        <h2>🎯 挑战说明</h2>
+        <p>这是一个存储了100 ETH的智能合约。</p>
+        <p><strong>目标：</strong>清空余额获取Flag。</p>
+        <div class="warning">
+            <strong>⚠️ 重要：</strong>你需要先获取攻击者账户的私钥才能开始挑战。
+            <br>点击下方按钮获取私钥：
+            <br>
+            <a href="/api/" class="link-btn">🔑 获取攻击者私钥</a>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>🔗 连接信息</h2>
+        <div class="info-row">
+            <span class="label">RPC端点：</span>
+            <code id="rpc-url">加载中...</code>
+            <button class="btn btn-copy" onclick="copyText('rpc-url')">复制</button>
+        </div>
+        <div class="info-row">
+            <span class="label">链ID：</span>
+            <code>1337</code>
+            <button class="btn btn-copy" onclick="copyText('1337')">复制</button>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>👤 攻击者账户</h2>
+        <div class="info-row">
+            <span class="label">地址：</span>
+            <div class="address" id="attacker-address">加载中...</div>
+            <button class="btn btn-copy" onclick="copyText('attacker-address')">复制</button>
+        </div>
+        <div class="success">
+            <strong>💡 提示：</strong>已经获取私钥了吗？使用以下方式连接：
+            <pre style="margin-top: 10px; background: #1e293b;">
+// 使用Web3.js
+const web3 = new Web3('【RPC端点】');
+const account = web3.eth.accounts.privateKeyToAccount('【你的私钥】');
+web3.eth.accounts.wallet.add(account);</pre>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>📄 合约信息</h2>
+        <div class="info-row">
+            <span class="label">合约地址：</span>
+            <div class="address" id="contract-address">加载中...</div>
+            <button class="btn btn-copy" onclick="copyText('contract-address')">复制</button>
+        </div>
+        
+        <div>
+            <button class="btn" onclick="toggleABI()">显示/隐藏合约ABI</button>
+        </div>
+        
+        <pre id="abi-content" style="display: none; margin-top: 15px;"></pre>
+    </div>
+    
+    <div class="section">
+        <h2>📝 合约源码</h2>
+        <pre id="contract-code">// 加载中...</pre>
+        <button class="btn" onclick="copyText('contract-code')">复制源码</button>
+    </div>
+    
+    <script>
+        // 页面加载时获取信息
+        async function loadChallengeInfo() {
+            try {
+                // 获取合约信息
+                const response = await fetch('/info.json');
+                const data = await response.json();
+                
+                // 更新页面
+                document.getElementById('contract-address').textContent = data.contract_address;
+                document.getElementById('abi-content').textContent = 
+                    JSON.stringify(data.contract_abi, null, 2);
+                document.getElementById('rpc-url').textContent = "http://furryctf.com:【容器端口】/rpc/";
+                document.getElementById('attacker-address').textContent = data.attacker_address;
+                
+                // 加载合约源码
+                const codeResponse = await fetch('/target.sol');
+                const code = await codeResponse.text();
+                document.getElementById('contract-code').textContent = code;
+                
+            } catch (error) {
+                console.error('加载失败:', error);
+                document.getElementById('contract-address').textContent = '加载失败，请刷新页面';
+            }
+        }
+        
+        // 工具函数
+        function copyText(elementId) {
+            let text;
+            if (elementId === '1337') {
+                text = '1337';
+            } else {
+                const element = document.getElementById(elementId);
+                text = element.textContent;
+            }
+            
+            navigator.clipboard.writeText(text)
+                .then(() => {
+                    // 显示短暂的复制成功提示
+                    const btn = event.target;
+                    const originalText = btn.textContent;
+                    btn.textContent = '✅ 已复制';
+                    btn.style.background = '#10b981';
+                    
+                    setTimeout(() => {
+                        btn.textContent = originalText;
+                        btn.style.background = '';
+                    }, 1500);
+                })
+                .catch(err => console.error('复制失败:', err));
+        }
+        
+        function toggleABI() {
+            const abiContent = document.getElementById('abi-content');
+            const btn = event.target;
+            
+            if (abiContent.style.display === 'none') {
+                abiContent.style.display = 'block';
+                btn.textContent = '隐藏合约ABI';
+            } else {
+                abiContent.style.display = 'none';
+                btn.textContent = '显示合约ABI';
+            }
+        }
+        
+        // 页面加载
+        loadChallengeInfo();
+    </script>
+</body>
+</html>

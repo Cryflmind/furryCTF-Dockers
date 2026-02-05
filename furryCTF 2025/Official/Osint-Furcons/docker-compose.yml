@@ -1,0 +1,15 @@
+name: "furryCTF"
+
+services:
+  web:
+    build: .
+    ports:
+      - "8080:80"
+    environment:
+      - SESSION_SAVE_PATH=/var/lib/php/sessions
+    volumes:
+      - session_data:/var/lib/php/sessions
+    restart: unless-stopped
+
+volumes:
+  session_data:

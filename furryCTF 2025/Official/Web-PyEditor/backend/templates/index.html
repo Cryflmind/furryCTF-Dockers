@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python 3 在线运行</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Python 3 在线运行</h1>
+        </div>
+
+        <div class="main">
+            <div class="editor-panel">
+                <div class="code-editor">
+                    <div class="editor-header">
+                        <span>代码输入</span>
+                        <div class="editor-actions">
+                            <button onclick="clearCode()">清空</button>
+                            <button onclick="insertExample()">示例</button>
+                        </div>
+                    </div>
+                    <textarea id="codeInput" placeholder="输入Python代码...">print("Hello Python 3.14!")</textarea>
+                </div>
+
+                <div class="args-input">
+                    <label>命令行参数:</label>
+                    <input type="text" id="argsInput" placeholder="可选参数">
+                </div>
+
+                <div class="run-controls">
+                    <button id="runBtn" onclick="runCode()">运行代码</button>
+                    <button id="stopBtn" onclick="stopCode()" disabled>停止执行</button>
+                </div>
+
+            </div>
+
+            <div class="output-panel">
+                <div class="output-terminal">
+                    <div class="terminal-header">
+                        <span>输出结果</span>
+                        <div class="terminal-actions">
+                            <button onclick="clearOutput()">清空</button>
+                            <button onclick="copyOutput()">复制</button>
+                        </div>
+                    </div>
+                    <div id="output" class="terminal-content"></div>
+                </div>
+
+                <div class="status-info">
+                    <h3>状态信息</h3>
+                    <div id="processStatus">状态: 等待中</div>
+                    <div id="processPID">进程ID: -</div>
+                    <div id="executionTime">运行时间: 0s</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let socket = io();
+        let currentPID = null;
+        let processActive = false;
+        let startTime = null;
+
+        socket.on('connect', function() {
+            console.log('已连接到服务器');
+        });
+
+        socket.on('output', function(data) {
+            addOutput(data.data);
+        });
+
+        socket.on('process_end', function(data) {
+            processActive = false;
+            document.getElementById('stopBtn').disabled = true;
+            document.getElementById('runBtn').disabled = false;
+            document.getElementById('processStatus').textContent = '状态: 已结束';
+        });
+
+        function addOutput(text) {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML += text + '\n';
+            outputDiv.scrollTop = outputDiv.scrollHeight;
+        }
+
+        function runCode() {
+            const code = document.getElementById('codeInput').value;
+            const args = document.getElementById('argsInput').value;
+
+            if (!code.trim()) {
+                addOutput('错误: 请输入代码');
+                return;
+            }
+
+            fetch('/api/run', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    code: code,
+                    args: args
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    currentPID = data.pid;
+                    processActive = true;
+                    startTime = Date.now();
+                    
+                    document.getElementById('runBtn').disabled = true;
+                    document.getElementById('stopBtn').disabled = false;
+                    document.getElementById('processStatus').textContent = '状态: 运行中';
+                    document.getElementById('processPID').textContent = `进程ID: ${data.pid}`;
+                    
+                    addOutput('> 进程已启动...');
+                    updateExecutionTime();
+                } else {
+                    addOutput(`错误: ${data.message}`);
+                }
+            })
+            .catch(error => {
+                addOutput(`错误: ${error}`);
+            });
+        }
+
+        function stopCode() {
+            if (currentPID && processActive) {
+                fetch('/api/terminate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        pid: currentPID
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        addOutput('> 进程已终止');
+                        processActive = false;
+                        document.getElementById('stopBtn').disabled = true;
+                        document.getElementById('runBtn').disabled = false;
+                        document.getElementById('processStatus').textContent = '状态: 已终止';
+                    }
+                });
+            }
+        }
+
+        function updateExecutionTime() {
+            if (processActive && startTime) {
+                const elapsed = Math.floor((Date.now() - startTime) / 1000);
+                document.getElementById('executionTime').textContent = `运行时间: ${elapsed}s`;
+                setTimeout(updateExecutionTime, 1000);
+            }
+        }
+
+        function clearCode() {
+            document.getElementById('codeInput').value = '';
+        }
+
+        function insertExample() {
+            const template = `def factorial(n):
+    if n <= 1:
+        return 1
+    else:
+        return n * factorial(n-1)
+
+def main():
+    print("计算阶乘示例")
+    
+    for i in range(1, 6):
+        result = factorial(i)
+        print(f"{i}! = {result}")
+    
+    return 0
+
+main()`;
+            
+            document.getElementById('codeInput').value = template;
+        }
+
+        function clearOutput() {
+            document.getElementById('output').innerHTML = '';
+        }
+
+        function copyOutput() {
+            const outputText = document.getElementById('output').innerText;
+            navigator.clipboard.writeText(outputText)
+                .then(() => alert('输出已复制'))
+                .catch(err => console.error('复制失败:', err));
+        }
+    </script>
+</body>
+</html>

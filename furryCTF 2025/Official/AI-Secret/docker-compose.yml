@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  chat-app:
+    build: .
+    ports:
+      - "8080:80"
+    environment:
+      - GZCTF_FLAG=${GZCTF_FLAG:-default_flag_value}
+      - DEEPSEEK_API_KEY=${DEEPSEEK_API_KEY}
+      - DEEPSEEK_BASE_URL=${DEEPSEEK_BASE_URL:-https://api.deepseek.com}
+      - MODEL=${MODEL:-deepseek-chat}
+    volumes:
+      - ./backend/templates/prompt.txt:/app/backend/templates/prompt.txt:ro
+    restart: unless-stopped

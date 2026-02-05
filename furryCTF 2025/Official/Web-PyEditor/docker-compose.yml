@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  python-debugger:
+    build: .
+    container_name: python-debugger
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=production
+      - SECRET_KEY=debugger_secret_key
+      - MAX_CODE_SIZE=1024
+      - TIMEOUT_SECONDS=10
+    volumes:
+      - ./backend/templates:/app/templates
+      - ./frontend/static:/app/static
+    networks:
+      - debugger-network
+
+networks:
+  debugger-network:
+    driver: bridge

@@ -1,0 +1,7 @@
+version: '3.8'
+
+services:
+  sfp-touch-emulator:
+    build: .
+    container_name: sfp-touch-emulator
+    restart: unless-stopped
